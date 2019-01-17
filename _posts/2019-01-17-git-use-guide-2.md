@@ -151,12 +151,37 @@ Date:   Thu Jan 17 12:03:29 2019 +0800
     Init project
 ```
 
-添加远程仓库，push -u的方式推送master，并建立跟踪分支
+添加远程仓库，并修改remote仓库的url为上面配置ssh key时在config里设置的别名。即修改.git/config中的remote仓库对应的，url = git@github.com:michaellqu/beat-taobao.git为url = git@michaellqu:michaellqu/beat-taobao.git 
 ```
 michaeldeMacBook-Pro:beat-taobao michael$ git remote add origin git@github.com:michaellqu/beat-taobao.git
 michaeldeMacBook-Pro:beat-taobao michael$ git remote -v
 origin	git@github.com:michaellqu/beat-taobao.git (fetch)
 origin	git@github.com:michaellqu/beat-taobao.git (push)
+
+michaeldeMacBook-Pro:beat-taobao michael$ cat ~/.ssh/config
+Host michaellqu
+    HostName github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa
+
+Host michaellqq
+    HostName github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/qq
+Host michaellgg
+    HostName github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/gmail
+    
+michaeldeMacBook-Pro:beat-taobao michael$ vi .git/config
+michaeldeMacBook-Pro:beat-taobao michael$ git remote -v
+origin	git@michaellqu:michaellqu/beat-taobao.git (fetch)
+origin	git@michaellqu:michaellqu/beat-taobao.git (push)
+
+```
+
+git push -u的方式推送master，并建立跟踪分支
+```
 michaeldeMacBook-Pro:beat-taobao michael$ git push -u origin master
 Enumerating objects: 6, done.
 Counting objects: 100% (6/6), done.
@@ -164,7 +189,7 @@ Delta compression using up to 4 threads
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (6/6), 395 bytes | 395.00 KiB/s, done.
 Total 6 (delta 0), reused 0 (delta 0)
-To github.com:michaellqu/beat-taobao.git
+To michaellqu/beat-taobao.git
  * [new branch]      master -> master
 Branch 'master' set up to track remote branch 'master' from 'origin'.
 michaeldeMacBook-Pro:beat-taobao michael$ git branch -av
@@ -204,7 +229,15 @@ michaeldeMacBook-Pro:xm-beat-tb michael$ git branch -v
 michaeldeMacBook-Pro:xm-beat-tb michael$ git log --oneline
 3825d0a (HEAD -> master, origin/master, origin/HEAD) Init project
 ```
-注：由于我在一台电脑上模拟多个独立的github账号，所以
+修改remote仓库的url为上面配置ssh key时在config里设置的别名。即修改.git/config中的remote仓库对应的，url = git@github.com:michaellqu/beat-taobao.git为url = git@michaellqu:michaellqu/beat-taobao.git
+
+
+```
+michaeldeMacBook-Pro:xm-beat-tb michael$ git remote -v
+origin	git@michaellqq:michaellqq/xm-beat-tb.git (fetch)
+origin	git@michaellqq:michaellqq/xm-beat-tb.git (push)
+```
+
 
 开发购物车模块
 
@@ -224,6 +257,6 @@ michaeldeMacBook-Pro:shopping-cart michael$ git commit -m"Shopping cart version 
 michaeldeMacBook-Pro:shopping-cart michael$ git log --oneline
 fd9e9c8 (HEAD -> master) Shopping cart version 1.0
 3825d0a (origin/master, origin/HEAD) Init project
-
 ```
+
 3. 的
